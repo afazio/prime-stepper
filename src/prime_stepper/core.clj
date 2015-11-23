@@ -1,6 +1,7 @@
 (ns prime-stepper.core
   (:gen-class))
 
+;; readability ftw
 (defn divisible? "Is m divisible by n?"
   [m n]
   (= (mod m n) 0))
