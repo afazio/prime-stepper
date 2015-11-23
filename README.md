@@ -33,9 +33,9 @@ And that's it.
 ### Why?
 
 I wrote this as a quick utility to spit out the first million steps starting at
-100,000.  This data was then used in my HTML5 pixi-prime-viewer application.
-Check out a demo [here](http://afaz.io/pixi-prime-viewer) and the source on
-github [here](http://github.com/afazio/pixi-prime-viewer).
+100,000.  This data was then used in my HTML5
+[pixi-prime-viewer](http://github.com/afazio/pixi-prime-viewer) application.
+Check out a demo [here](http://afaz.io/pixi-prime-viewer).
 
 ### Prerequisites
 
