@@ -1,4 +1,4 @@
-(ns prime-steps.core
+(ns prime-stepper.core
   (:gen-class))
 
 (defn divisible? "Is m divisible by n?"

@@ -1,9 +1,7 @@
-(defproject prime-steps "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+(defproject prime-stepper "0.1.0"
+  :description "Step in time.  Er, I mean step through primes"
+  :url "http://github.com/afazio/prime-stepper"
   :dependencies [[org.clojure/clojure "1.7.0"]]
-  :main ^:skip-aot prime-steps.core
+  :main ^:skip-aot prime-stepper.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
