@@ -6,38 +6,34 @@
   [m n]
   (= (mod m n) 0))
 
-(defn quick-prime-check
-  "Check if n is prime by checking divisibility by numbers up to sqrt(n)
-  starting at 5, ignoring mod 2 and mod 3."
-  [n]
-  (let [m (Math/sqrt n)]
-    (not-any? #(or (divisible? n %)
-                   (divisible? n (+ % 2)))
-              (range 5 m 6))))
-
-(defn prime? "Is n prime?"
-  [n]
+(defn prime?
+  "Is n prime?  Uses memoized values of previously found primes to speed things
+  up."
+  [n prime-list]
   (and (number? n)
        (divisible? n 1)
        (> n 1)
-       (if (divisible? n 2) (= n 2)
-           (if (divisible? n 3) (= n 3)
-               (quick-prime-check n)))))
+       (let [m (Math/sqrt n)]
+         (not-any? #(divisible? n %)
+                   (take-while #(<= % m) prime-list)))))
 
 (defn steps-to-next-prime
-  "How many steps until we reach the next prime number from n"
-  ([n] (steps-to-next-prime n 1))
-  ([n curr-steps]
-   (if (prime? (+ n curr-steps))
+  "How many steps until we reach the next prime number from n."
+  ([n prime-list] (steps-to-next-prime n prime-list 1))
+  ([n prime-list curr-steps]
+   (if (prime? (+ n curr-steps) prime-list)
      curr-steps
-     (recur n (inc curr-steps)))))
+     (recur n prime-list (inc curr-steps)))))
 
-(defn prime-steps "lazy seq of steps for reaching primes starting at 1"
+(defn prime-steps
+  "generate lazy seq of steps for reaching primes starting at n (default 1)."
   ([] (prime-steps 1))
-  ([n]
-   (let [step (steps-to-next-prime n)]
+  ([n] (prime-steps n []))
+  ([n prime-list]
+   (let [step (steps-to-next-prime n prime-list)
+         next-prime (+ n step)]
      (cons step
-           (lazy-seq (prime-steps (+ n step)))))))
+           (lazy-seq (prime-steps next-prime (conj prime-list next-prime)))))))
 
 (defn -main
   "Given n, print out n steps to primes starting at 1 or second argument if it exists."
